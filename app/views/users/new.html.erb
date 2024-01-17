@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add User</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+  <style>
+       body {
+            font-family: 'Philosopher', serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://wallpaper-house.com/data/out/8/wallpaper2you_231925.jpg') center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #e44d26;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .required-star {
+            color: #e44d26;
+            margin-left: 5px;
+        }
+
+        .submit-button,
+        .button {
+            background-color: #900c19;
+            color: #f2c452;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+            width:10pc;
+            font-size:16px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .errors {
+            color: #e44d26;
+            margin-bottom: 10px;
+        }
+
+    .autocomplete {
+      position: relative;
+      display: inline-block;
+    }
+
+    .autocomplete-input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .autocomplete-list {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .autocomplete-item {
+      padding: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .autocomplete-item:hover {
+      background-color: #f4f4f4;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Password strength checking
+      const passwordField = document.getElementById('user_password');
+      const strengthIndicator = document.getElementById('password-strength');
+
+      if (passwordField && strengthIndicator) {
+        passwordField.addEventListener('input', function () {
+          const password = passwordField.value;
+          const result = zxcvbn(password);
+
+          // Update the UI with the password strength
+          strengthIndicator.innerHTML = `Password Strength: ${result.score}/4`;
+
+          // You can also add more visual indicators based on the strength, e.g., change color
+          switch (result.score) {
+            case 0:
+            case 1:
+              strengthIndicator.style.color = '#e44d26'; // Weak
+              break;
+            case 2:
+              strengthIndicator.style.color = '#ffa500'; // Fair
+              break;
+            case 3:
+              strengthIndicator.style.color = '#2e8b57'; // Good
+              break;
+            case 4:
+              strengthIndicator.style.color = '#4caf50'; // Strong
+              break;
+          }
+        });
+      }
+
+      // Autocomplete for user role
+      const userRoleInput = document.getElementById('user_user_role');
+      const autocompleteList = document.getElementById('autocomplete-list');
+
+      if (userRoleInput && autocompleteList) {
+        const roles = ['User', 'Admin'];
+
+        userRoleInput.addEventListener('input', function () {
+          const inputText = userRoleInput.value.toLowerCase();
+          const filteredRoles = roles.filter(role => role.toLowerCase().includes(inputText));
+
+          // Display the filtered roles in the autocomplete list
+          autocompleteList.innerHTML = '';
+          filteredRoles.forEach(role => {
+            const listItem = document.createElement('div');
+            listItem.classList.add('autocomplete-item');
+            listItem.textContent = role;
+
+            // Set the selected role when clicked
+            listItem.addEventListener('click', function () {
+              userRoleInput.value = role;
+              autocompleteList.innerHTML = ''; // Hide the autocomplete list
+            });
+
+            autocompleteList.appendChild(listItem);
+          });
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Create User</h1>
+
+    <% if @user.errors.any? %>
+      <div class="errors">
+        <h2>Please fix the following issues:</h2>
+        <% @user.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_with model: User.new, url: users_path, local: true do |f| %>
+      <p>
+        <%= f.label :user_name %>
+        <%= f.text_field :user_name %>
+      </p>
+
+      <p>
+        <%= f.label :password %>
+        <%= f.password_field :password, id: 'user_password' %>
+        <div id="password-strength"></div>
+      </p>
+
+      <p>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </p>
+
+      <p>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </p>
+
+      <p>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </p>
+
+      <p>
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number %>
+      </p>
+
+      <div class="autocomplete">
+        <%= f.label :user_role %>
+        <%= f.text_field :user_role, id: 'user_user_role', class: 'autocomplete-input' %>
+        <div id="autocomplete-list" class="autocomplete-list"></div>
+      </div>
+
+      <p class="button-container">
+          <%= f.submit 'Submit', class: 'submit-button' %>
+          <%= link_to 'Back', users_path, class: 'button' %>
+      </p>
+   <% end %>
+  </div>
+</body>
+</html>

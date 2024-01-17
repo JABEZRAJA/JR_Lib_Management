@@ -1,0 +1,35 @@
+
+.user-details {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-details th, .user-details td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .user-details th {
+    background-color: #f5f1e9;
+    color: #886619;
+  }
+  
+  .user-details td {
+    font-size: 16px;
+  }
+  
+  .user-details a {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #900c19;
+    color: #f2c452;
+    cursor: pointer;
+    font-size:16px;
+  }
+  
