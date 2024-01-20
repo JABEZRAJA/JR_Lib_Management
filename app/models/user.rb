@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :registerable,
+         :recoverable, :rememberable, :validatable
   has_secure_password
 
   validates :user_name, presence: true
@@ -10,6 +14,11 @@ class User < ApplicationRecord
   enum user_role: { User: 0, Admin: 1 }
 
   private
+
+  # def password_digest(password_digest)
+  #   # You can add custom logic here before setting the password
+  #   super
+  # end
 
   def password_complexity
     return if password.blank? || password.match?(%r{\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\\/-]).{8,}\z})

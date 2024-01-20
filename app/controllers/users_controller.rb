@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @all_users = User.all
+    # @all_users = User.all
+    @all_users = User.all.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -23,8 +24,8 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = 'Welcome to JR Library Management :)'
+      log_in @user
       redirect_to users_path
-      # redirect_to @users will redirect this to show page which will soon become as profile page
     else
       render :new
     end
@@ -45,6 +46,12 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @user.destroy
     redirect_to users_path
+  end
+
+  def home
+    @books = Book.all
+    @all_users = User.all.paginate(page: params[:page], per_page: 10)
+    @user = User.find_by(id: params[:id])
   end
 
   private

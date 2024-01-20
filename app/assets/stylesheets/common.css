@@ -1,0 +1,68 @@
+body {
+  font-family: 'Philosopher', serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('https://wallpaper-house.com/data/out/8/wallpaper2you_231925.jpg') center center fixed;
+  background-size: cover;
+}
+
+.user-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 62.5rem;
+}
+
+h1 {
+  text-align: center;
+  color: #aa8531;
+  font-family: 'Philosopher',serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+thead {
+  display: table-header-group;
+  text-align: center;
+}
+
+th {
+  background-color: #900c19;
+  color: #f2c452;
+}
+
+a.button {
+  display: inline-block;
+  background-color: #900c19;
+  color: #f2c452;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+a.button:hover {
+  background-color: #700215;
+}

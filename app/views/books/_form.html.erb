@@ -1,0 +1,42 @@
+
+    <%= form_with(model: book, local: true) do |f| %>
+      <p>
+        <%= f.label :Name %>
+        <%= f.text_field :title, required: true %>
+      </p>
+
+      <p>
+        <%= f.label :Author_name %>
+        <%= f.text_field :author_name, required: true%>
+      </p>
+
+      <p>
+        <%= f.label :ISBN %>
+        <%= f.text_field :isbn, required: true %>
+      </p>
+
+      <p>
+        <%= f.label :Total_books %>
+        <%= f.text_field :number_of_books, required: true %>
+      </p>
+
+      <p>
+        <%= f.label :Genre %>
+        <%= f.text_field :genre, required: true %>
+      </p>
+
+      <p>
+        <%= f.label :Published_Date %>
+        <%= f.date_field :published_year, required: true %>
+      </p>
+
+      <p>
+        <%= f.label :image %>
+        <%= f.file_field :image, required: true%>
+      </p>
+
+      <p class="button-container">
+          <%= f.submit 'Submit', class: 'submit-button' %>
+          <%= link_to 'Back', books_path, class: 'button' %>
+      </p>
+   <% end %>

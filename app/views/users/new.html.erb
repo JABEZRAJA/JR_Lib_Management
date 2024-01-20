@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add User</title>
+    <%= stylesheet_link_tag 'common', media: 'all', 'data-turbolinks-track': 'reload' %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
   <style>
        body {
@@ -19,108 +20,6 @@
             background: url('https://wallpaper-house.com/data/out/8/wallpaper2you_231925.jpg') center center fixed;
             background-size: cover;
         }
-
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        h2 {
-            color: #e44d26;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .required-star {
-            color: #e44d26;
-            margin-left: 5px;
-        }
-
-        .submit-button,
-        .button {
-            background-color: #900c19;
-            color: #f2c452;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            margin-right: 10px;
-            text-decoration: none;
-            display: inline-block;
-            width:10pc;
-            font-size:16px;
-        }
-
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .errors {
-            color: #e44d26;
-            margin-bottom: 10px;
-        }
-
-    .autocomplete {
-      position: relative;
-      display: inline-block;
-    }
-
-    .autocomplete-input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .autocomplete-list {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-    }
-
-    .autocomplete-item {
-      padding: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .autocomplete-item:hover {
-      background-color: #f4f4f4;
-    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -188,14 +87,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Create User</h1>
-
+    <h1>Add User</h1>
     <% if @user.errors.any? %>
-      <div class="errors">
-        <h2>Please fix the following issues:</h2>
-        <% @user.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, 'Error') %> Please fix the following issues:</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
 

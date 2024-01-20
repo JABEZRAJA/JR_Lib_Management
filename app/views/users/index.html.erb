@@ -84,7 +84,12 @@
 
 <body>
   <div class="user-details">
-    <h1>List All Users</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; height: 2pc;">
+      <h1>All Users</h1>
+        <%= link_to new_user_path, class: 'button' do %>
+          <i class="fas fa-plus icon"></i> Add
+        <% end %>
+    </div>
     <table>
       <thead>
         <tr>
@@ -108,9 +113,8 @@
       </tbody>
     </table>
 
-    <%= link_to new_user_path, class: 'button' do %>
-      <i class="fas fa-plus icon"></i> Add
-    <% end %>
+    <%= will_paginate @all_users %>
+
   </div>
 
   <%= yield %>

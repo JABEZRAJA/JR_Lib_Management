@@ -62,6 +62,24 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Rubocop support for auto alignment
-#group :development, :test do
+# group :development, :test do
 #  gem 'rubocop', require: false
-#end
+# end
+
+# Support for Pagination
+gem 'will_paginate'
+
+# devise gem
+gem 'devise'
+
+# Support for Pagination (another choose)
+gem 'kaminari'
+
+# Support for Search and Filter
+gem 'ransack'
+
+# Support bootstap files and classes
+gem 'bootstrap', '~> 4.3.1'
+
+# Support for image optimization
+gem 'image_optim'

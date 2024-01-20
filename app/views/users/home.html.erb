@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JRLibManagement</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #aa8531;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+    .logo {
+      max-width: 30px;
+    }
+
+.search-bar {
+  text-align: center;
+  flex-grow: 1; /* Allow the search bar to grow and take available space */
+}
+
+    .search-input {
+      padding: 8px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .search-button {
+      padding: 8px 15px;
+      background-color: #ddd;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+.cart-icon,
+.profile-icon {
+  max-width: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+    main {
+      text-align: center;
+      padding: 70px 20px 20px; /* Adjust top padding to account for fixed header */
+      width: 80%;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 200px;
+      padding: 15px;
+      margin: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    /* Converted SCSS to CSS */
+    figure {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px; /* Adjust the width as per your requirement */
+      height: 300px; /* Adjust the height as per your requirement */
+      border-radius: 10px;
+      box-shadow: 
+        0 1px 3px rgba(0,0,0,0.12), 
+        0 1px 2px rgba(0,0,0,0.24);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      overflow: hidden;
+      margin: 0 auto; /* Center the figure */
+    }
+
+    figure:hover {
+      box-shadow: 
+        0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    figure:hover h1 {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+
+    figure:hover img {
+      transform: scale(1.25);
+    }
+
+    figure:hover figcaption {
+      bottom: 0;
+    }
+
+    figure h1 {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      margin: 0;
+      padding: 0;
+      color: white;
+      font-size: 24px; /* Adjust the font size as per your requirement */
+      font-weight: 100;
+      line-height: 1;
+      opacity: 1;
+      transform: scale(1);
+      transition: 0.25s ease;
+      z-index: 999;
+    }
+
+    figure img {
+      height: 100%;
+      width: 100%; /* Ensure the image takes the full width of the figure */
+      transition: 0.25s;
+    }
+
+    figure figcaption {
+      position: absolute;
+      bottom: -34%;
+      width: 100%;
+      margin: 0;
+      padding: 10px; /* Adjust padding as per your requirement */
+      background-color: rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      color: white;
+      line-height: 1;
+      transition: 0.25s;
+    }
+
+    figure figcaption h3 {
+      margin: 0 0 10px; /* Adjust margin as per your requirement */
+      padding: 0;
+    }
+
+    figure figcaption p {
+      font-size: 12px; /* Adjust the font size as per your requirement */
+      line-height: 1.5;
+    }
+
+    figure figcaption button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0 0;
+      padding: 8px 15px;
+      background-color: #1abc9c;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 12px; /* Adjust the font size as per your requirement */
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <!-- Logo -->
+  <%= link_to root_path do %>
+    <%= image_tag('https://img.freepik.com/premium-vector/black-white-logo-letter-jr_773552-361.jpg', alt: 'Your Logo', class: 'logo') %>
+  <% end %>
+   <p>JRLibManagement</p>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <%# <%= form_tag(search_users_path, method: :get) do %>
+      <%# <%= text_field_tag :query, params[:query], placeholder: 'Search...', class: 'search-input' %>
+      <%# <%= submit_tag 'Search', class: 'search-button' %>
+    <%# <% end %>
+  </div>
+
+  <!-- Cart Image -->
+  <%# <%= link_to cart_path do %>
+    <%= image_tag('https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-outline-bag-icon-symbol-isolated-png-image_1727847.jpg', alt: 'Shopping Cart', class: 'cart-icon') %>
+  <%# <% end %>
+
+  <!-- Profile Icon -->
+  <%# <%= link_to profile_path do %>
+    <%= image_tag('https://i.pinimg.com/originals/61/f7/5e/61f75ea9a680def2ed1c6929fe75aeee.jpg', alt: 'User Profile', class: 'profile-icon') %>
+  <%# <% end %>
+</header>
+
+<main>
+  <%# <%= link_to 'Back', users_path, class: 'button' %>
+  <%# <%= link_to new_user_path, class: 'button' do %>
+    <%# <i class="fas fa-plus icon"></i> Add
+  <% end %>
+
+  <div class="card-container">
+    <% @books.each do |book| %>
+      <figure class="image-block">
+        <%= image_tag(book.image, alt: book.title) %>
+        <figcaption>
+          <%# <h3><%= book.author_name %></h3>
+          <%# <p><%= book.title</p> %>
+          <%= link_to 'Show', book_path(book), class: 'button' %>
+        </figcaption>
+      </figure>
+    <% end %>
+  </div>
+
+</main>
+
+</body>
+</html>
